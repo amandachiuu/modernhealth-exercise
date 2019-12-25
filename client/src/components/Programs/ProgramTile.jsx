@@ -1,15 +1,29 @@
 import React from "react";
 import './ProgramTile.css';
-import { Card } from 'semantic-ui-react';
+import { Modal, Image, Card } from 'semantic-ui-react';
 
-function ProgramTile(num, name) {
+function ProgramTile(program) {
+    const imageStyle = {
+        height: '300px',
+        width: '100%'
+    };
     return (
-        <Card className="ProgramTile">
-            <Card.Content>
-                <Card.Meta>Part {num}</Card.Meta>
-                <Card.Header>{name}</Card.Header>
-            </Card.Content>
-        </Card>
+        <Modal trigger= {
+            <Card className="ProgramTile">
+                <Image src={program.image_id} wrapped />
+                <Card.Content>
+                    <Card.Meta>Part {program.program_id}</Card.Meta>
+                    <Card.Header>{program.title}</Card.Header>
+                </Card.Content>
+            </Card>
+        }>
+            <Modal.Content>
+                <Modal.Description>
+                    {program.description}
+                </Modal.Description>
+            </Modal.Content>
+
+        </Modal>
     );
 }
 

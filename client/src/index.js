@@ -5,26 +5,31 @@ import {
     Switch,
     Route
   } from "react-router-dom";
-// import { Provider } from 'react-redux'
-// import { createStore } from 'redux'
-// import rootReducer from '../redux/'
+import { Provider } from 'react-redux';
+import { createStore, compose, applyMiddleware } from 'redux';
+import thunk from "redux-thunk";
+import rootReducer from './redux/reducers';
 
 import './index.css';
 import ProgramsPage from './containers/Programs/ProgramsPage';
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
 
 import * as serviceWorker from './serviceWorker';
 
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer, composeEnhancer(applyMiddleware(thunk)))
+
 ReactDOM.render(
-<body>
-<Router>
-    <Switch>
-        <Route path="/programs">
-            <ProgramsPage /> 
-        </Route>
-    </Switch> 
-</Router>
-</body>
+<Provider store={store}>
+    <Router>
+        <Switch>
+            <Route path="/programs">
+                <ProgramsPage /> 
+            </Route>
+        </Switch> 
+    </Router>
+</Provider>
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
