@@ -1,15 +1,15 @@
 import React from 'react';
-import ProgramTile from '../../components/Programs/ProgramTile';
+import ProgramTile from '../components/ProgramTile';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { fetchPrograms } from "../../redux/actions";
+import { fetchPrograms } from "../redux/actions";
 
 class ProgramsPage extends React.Component {
     componentDidMount() {
         this.props.fetchPrograms();
     }
     
-    getProgramTiles() {        
+    getProgramTiles() {
         const tiles = this.props.programs.map(program => (
             <Grid.Column>
                 {ProgramTile(program)}

@@ -1,16 +1,17 @@
 import React from "react";
-import './ProgramTile.css';
-import { Modal, Image, Card } from 'semantic-ui-react';
+import '../styles/ProgramTile.css';
+import { Modal, Image, Card, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+var slugify = require('slugify');
 
 function ProgramTile(program) {
-    const imageStyle = {
-        height: '300px',
-        width: '100%'
-    };
+    const sectionSlug = slugify(program.title, {replacement: '-', lower: true})
+    const sectionLink = `/programs/${sectionSlug}`;
+    const imageLink = `/${program.image_id}`
     return (
-        <Modal trigger= {
+        <Modal className="ProgramModal" trigger= {
             <Card className="ProgramTile">
-                <Image src={program.image_id} wrapped />
+                <Image src={imageLink} wrapped />
                 <Card.Content>
                     <Card.Meta>Part {program.program_id}</Card.Meta>
                     <Card.Header>{program.title}</Card.Header>
@@ -21,8 +22,8 @@ function ProgramTile(program) {
                 <Modal.Description>
                     {program.description}
                 </Modal.Description>
+                <Button primary as={Link} to={sectionLink}>Start</Button>
             </Modal.Content>
-
         </Modal>
     );
 }
